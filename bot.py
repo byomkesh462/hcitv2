@@ -45,16 +45,16 @@ async def link_handler(bot, message):
         #hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
         await bot.send_message(
-        chat_id=message.chat.first_name,
+        chat_id=message.chat.id,
         text=f'Here is your [HLS Link]({hls_link})',
         parse_mode="markdown",
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="💰 Donate 💰", url="https://PayPal.me/AbhishekKumarIN47") ], 
                                              [ InlineKeyboardButton(text="⭕ Support ⭕", url="https://t.me/TeleRoid14"),
                                                InlineKeyboardButton(text="⭕️ Channel ⭕️", url="https://t.me/TeleRoidGroup") ],
-                                             [ InlineKeyboardButton(text="♻ Help ", callback_data="help"),                                                
-                                               InlineKeyboardButton(text="👥 About ", callback_data="aboutbot") ], 
-                                             [ InlineKeyboardButton(text="🔐 Close🔐", callback_data="close") ] ] ) )
+                                             [ InlineKeyboardButton(text="♻ Help ", url="https://t.me/TeleRoid14),                                                
+                                               InlineKeyboardButton(text="👥 About ", url="https://t.me/TeleRoid14) ], 
+                                             [ InlineKeyboardButton(text="🔐 Close🔐", url="https://t.me/TeleRoid14) ] ] ) )
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 

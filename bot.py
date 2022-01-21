@@ -33,8 +33,27 @@ async def link_handler(bot, message):
     #event = r.json()
     try:
         hls_link = event.get('hls')
+        posterImage = event.get('posterImage')
+        videoImage = event.get('videoImage')
+        subtitle = event.get('subtitle')
+        lower = event.get('270p')
+        medium = event.get('360p')
+        higher = event.get('720p')
+        title = event.get('title')
+        description = event.get('description')
         #hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
+        await bot.send_message(
+        chat_id=update.chat.id,
+        text=f'Here is your [HLS Link]({hls_link})',
+        parse_mode="markdown",
+        disable_web_page_preview=True,
+        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="💰 Donate 💰", url="https://PayPal.me/AbhishekKumarIN47") ], 
+                                             [ InlineKeyboardButton(text="⭕ Support ⭕", url="https://t.me/TeleRoid14"),
+                                               InlineKeyboardButton(text="⭕️ Channel ⭕️", url="https://t.me/TeleRoidGroup") ],
+                                             [ InlineKeyboardButton(text="♻ Help ", callback_data="help"),                                                
+                                               InlineKeyboardButton(text="👥 About ", callback_data="aboutbot") ], 
+                                             [ InlineKeyboardButton(text="🔐 Close🔐", callback_data="close") ] ] ) )
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 

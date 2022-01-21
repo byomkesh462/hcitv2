@@ -3,6 +3,7 @@ from os import environ
 import aiohttp
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+#from pyrogram.raw.types import InputMediaPhotoExternal
 
 API_ID = environ.get('API_ID')
 API_HASH = environ.get('API_HASH')
@@ -46,11 +47,11 @@ async def link_handler(bot, message):
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
         await bot.send_message(
         chat_id=message.chat.id,
-        text=f'**Content Name:** `{title}\n\n**Description:** `{description}`\n\nHere is your [HLS Link]({hls_link})',
+        text=f"**Content Name:** `{title}`\n\n**Description:** `{description}`\n\nHere is your [HLS Link]({hls_link})",
         parse_mode="markdown",
         disable_web_page_preview=True,
         reply_to_message_id=message.message_id,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS Link 🔗", url=hls_link) ], 
+        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS YTDL Link 🔗", url=hls_link) ], 
                                              [ InlineKeyboardButton(text="270P", url=lower),
                                                InlineKeyboardButton(text="360P", url=medium),
                                                InlineKeyboardButton(text="720P", url=higher) ],

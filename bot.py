@@ -1,5 +1,4 @@
 import requests
-import json
 from os import environ
 import aiohttp
 from pyrogram import Client, filters
@@ -30,7 +29,7 @@ async def start(bot, message):
 async def link_handler(bot, message):
     #link = message.matches[0].group(0)
     try:
-        hls_link = await event.get('hls')
+        hls_link = event.get('hls')
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)

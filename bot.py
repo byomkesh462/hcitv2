@@ -15,8 +15,8 @@ bot = Client('gplink bot',
              workers=50,
              sleep_threshold=10)
 
-r = requests.get('https://hcitv.herokuapp.com/hit.php?url={link}')
-event = r.json()
+#r = requests.get('https://hcitv.herokuapp.com/hit.php?url={link}')
+#event = r.json()
 
 @bot.on_message(filters.command('start') & filters.private)
 async def start(bot, message):

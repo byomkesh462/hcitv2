@@ -2,7 +2,7 @@ import requests
 from os import environ
 import aiohttp
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 API_ID = environ.get('API_ID')
 API_HASH = environ.get('API_HASH')
@@ -34,8 +34,8 @@ async def link_handler(bot, message):
     #event = r.json()
     try:
         hls_link = event.get('hls')
-        posterImage = event.get('posterImage')
-        videoImage = event.get('videoImage')
+        posterimage = event.get('posterImage')
+        videoimage = event.get('videoImage')
         subtitle = event.get('subtitle')
         lower = event.get('270p')
         medium = event.get('360p')
@@ -49,12 +49,14 @@ async def link_handler(bot, message):
         text=f'Here is your [HLS Link]({hls_link})',
         parse_mode="markdown",
         disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="💰 Donate 💰", url="https://PayPal.me/AbhishekKumarIN47") ], 
-                                             [ InlineKeyboardButton(text="⭕ Support ⭕", url="https://t.me/TeleRoid14"),
-                                               InlineKeyboardButton(text="⭕️ Channel ⭕️", url="https://t.me/TeleRoidGroup") ],
-                                             [ InlineKeyboardButton(text="♻ Help ", url="https://t.me/TeleRoid14"),                                                
-                                               InlineKeyboardButton(text="👥 About ", url="https://t.me/TeleRoid14") ], 
-                                             [ InlineKeyboardButton(text="🔐 Close🔐", url="https://t.me/TeleRoid14") ] ] ) )
+        reply_to_message_id=update.message_id,
+        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS Link 🔗", url=hls_link) ], 
+                                             [ InlineKeyboardButton(text="270P", url=lower),
+                                               InlineKeyboardButton(text="360P", url=medium),
+                                               InlineKeyboardButton(text="720P", url=higher) ],
+                                             [ InlineKeyboardButton(text="Poster", url=posterimage),                                                
+                                               InlineKeyboardButton(text="Thumbnail", url=videoimage) ], 
+                                             [ InlineKeyboardButton(text="📝 Subtitles 📝", url=subtitle) ] ] ) )
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 

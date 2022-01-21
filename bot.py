@@ -28,7 +28,7 @@ async def start(bot, message):
 
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
-    link = message.matches[0].group(0)
+    #link = message.matches[0].group(0)
     try:
         hls_link = await event.get('hls')
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)

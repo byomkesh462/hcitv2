@@ -28,23 +28,25 @@ async def start(bot, message):
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
-    r =  await requests.get('https://hcitv.herokuapp.com/hit.php?url={link}')
-    event = r.json()
+    #r = await get_shortlink(link)
+    #r =  await requests.get('https://hcitv.herokuapp.com/hit.php?url={link}')
+    #event = r.json()
     try:
-        hls_link = event.get('hls')
+        #hls_link = event.get('hls')
+        hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 
 
-"""async def get_shortlink(link):
-    url = 'https://gplinks.in/api'
+async def get_shortlink(link):
+    url = 'https://hcitv.herokuapp.com/hit.php?url=link'
     params = {'api': API_KEY, 'url': link}
 
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params, raise_for_status=True) as response:
+        async with session.get(url, raise_for_status=True) as response:
             data = await response.json()
-            return data["shortenedUrl"]"""
+            return data["hls"]
 
 
 bot.run()

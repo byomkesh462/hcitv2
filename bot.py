@@ -60,7 +60,7 @@ async def link_handler(bot, message):
                                              [ InlineKeyboardButton(text="📝 Subtitles 📝", url=subtitle) ] ] ) )
         await bot.send_photo(
         chat_id=message.chat.id,
-        photo=f"{videoIgame}"
+        photo=f"{videoimage}",
         caption=f"**Content Name:** `{title}`\n\n**Description:** `{description}`\n\nHere is your [HLS Link]({hls_link})",
         reply_to_message_id=message.message_id,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS YTDL Link 🔗", url=hls_link) ], 

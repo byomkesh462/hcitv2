@@ -28,10 +28,9 @@ async def start(bot, message):
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
-    r = await get_shortlink(link)
+    event = await get_shortlink(link)
     #r =  await requests.get('https://hcitv.herokuapp.com/hit.php?url={link}')
     #event = r.json()
-    event =json.loads(r, strict=False)
     try:
         hls_link = event.get('hls')
         #hls_link = await get_shortlink(link)

@@ -1,3 +1,5 @@
+import requests
+import json
 from os import environ
 import aiohttp
 from pyrogram import Client, filters
@@ -14,6 +16,8 @@ bot = Client('gplink bot',
              workers=50,
              sleep_threshold=10)
 
+r = requests.get('https://hcitv.herokuapp.com/hit.php?url=https://www.hoichoi.tv/webseries/byomkesh-s05-e01')
+event = r.json()
 
 @bot.on_message(filters.command('start') & filters.private)
 async def start(bot, message):
@@ -26,20 +30,20 @@ async def start(bot, message):
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
     try:
-        short_link = await get_shortlink(link)
-        await message.reply(f'Here is your [short link]({short_link})', quote=True)
+        hls_link = await event.get('hls')
+        await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 
 
-async def get_shortlink(link):
+"""async def get_shortlink(link):
     url = 'https://gplinks.in/api'
     params = {'api': API_KEY, 'url': link}
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params, raise_for_status=True) as response:
             data = await response.json()
-            return data["shortenedUrl"]
+            return data["shortenedUrl"]"""
 
 
 bot.run()

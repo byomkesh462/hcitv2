@@ -49,7 +49,7 @@ async def link_handler(bot, message):
         text=f'Here is your [HLS Link]({hls_link})',
         parse_mode="markdown",
         disable_web_page_preview=True,
-        reply_to_message_id=update.message_id,
+        reply_to_message_id=message.message_id,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS Link 🔗", url=hls_link) ], 
                                              [ InlineKeyboardButton(text="270P", url=lower),
                                                InlineKeyboardButton(text="360P", url=medium),

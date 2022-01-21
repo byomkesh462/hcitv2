@@ -44,7 +44,7 @@ async def link_handler(bot, message):
         #hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
         await bot.send_message(
-        chat_id=update.chat.id,
+        chat_id=cmd.from_user.id,
         text=f'Here is your [HLS Link]({hls_link})',
         parse_mode="markdown",
         disable_web_page_preview=True,

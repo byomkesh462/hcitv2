@@ -46,7 +46,7 @@ async def link_handler(bot, message):
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
         await bot.send_message(
         chat_id=message.chat.id,
-        text=f'Here is your [HLS Link]({hls_link})',
+        text=f'**Content Name:** `{title}\n\n**Description:** `{description}`\n\nHere is your [HLS Link]({hls_link})',
         parse_mode="markdown",
         disable_web_page_preview=True,
         reply_to_message_id=message.message_id,

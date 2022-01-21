@@ -15,7 +15,7 @@ bot = Client('gplink bot',
              workers=50,
              sleep_threshold=10)
 
-r = requests.get('https://hcitv.herokuapp.com/hit.php?url=https://www.hoichoi.tv/webseries/byomkesh-s05-e01')
+r = requests.get('https://hcitv.herokuapp.com/hit.php?url={link}')
 event = r.json()
 
 @bot.on_message(filters.command('start') & filters.private)
@@ -27,7 +27,9 @@ async def start(bot, message):
 
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
-    #link = message.matches[0].group(0)
+    link = message.matches[0].group(0)
+    r = requests.get('https://hcitv.herokuapp.com/hit.php?url={link}')
+    event = r.json()
     try:
         hls_link = event.get('hls')
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)

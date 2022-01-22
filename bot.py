@@ -37,26 +37,27 @@ async def link_handler(bot, message):
         hls_link = event.get('hls')
         posterimage = event.get('posterImage')
         videoimage = event.get('videoImage')
-        subtitle = event.get('subtitle') if (event.get('subtitle') is not None) else "No Subtitle Found"
+        #subtitle = event.get('subtitle')
         lower = event.get('270p')
         medium = event.get('360p')
         higher = event.get('720p')
         title = event.get('title')
         description = event.get('description')
+        if (event.get('subtitle') is not None):
+          subtitle = event.get('subtitle')
         #hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
         await bot.send_photo(
         chat_id=message.chat.id,
         photo=f"{videoimage}",
-        caption=f"**🔰 Name:** `{title}`\n\n**🔰 Description:** `{description}`\n\n🔗 Here is your [HLS Link]({hls_link})",
+        caption=f"**🔰 Name:** `{title}`\n\n**🔰 Description:** `{description}`\n\n**📝 Subtitle:** `{subtitle}`\n\n🔗 Here is your [HLS Link]({hls_link})",
         reply_to_message_id=message.message_id,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS YTDL Link 🔗", url=hls_link) ], 
                                              [ InlineKeyboardButton(text="270P", url=lower),
                                                InlineKeyboardButton(text="360P", url=medium),
                                                InlineKeyboardButton(text="720P", url=higher) ],
                                              [ InlineKeyboardButton(text="Poster", url=posterimage),                                                
-                                               InlineKeyboardButton(text="Thumbnail", url=videoimage) ], 
-                                             [ InlineKeyboardButton(text="📝  Subtitles  📝", url=subtitle) ] ] ) )
+                                               InlineKeyboardButton(text="Thumbnail", url=videoimage) ] ] ) )
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 

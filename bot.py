@@ -37,7 +37,7 @@ async def link_handler(bot, message):
         hls_link = event.get('hls')
         posterimage = event.get('posterImage')
         videoimage = event.get('videoImage')
-        subtitle = event.get('subtitle')
+        subtitle = event.get('subtitle') if (event.get('subtitle') is not None) else "No Subtitle Found"
         lower = event.get('270p')
         medium = event.get('360p')
         higher = event.get('720p')

@@ -37,14 +37,12 @@ async def link_handler(bot, message):
         hls_link = event.get('hls')
         posterimage = event.get('posterImage')
         videoimage = event.get('videoImage')
-        #subtitle = event.get('subtitle')
+        subtitle = event.get('subtitle') if (event.get('subtitle') is not None) else "No Substitle found."
         lower = event.get('270p')
         medium = event.get('360p')
         higher = event.get('720p')
         title = event.get('title')
         description = event.get('description')
-        if (event.get('subtitle') is not None):
-          subtitle = event.get('subtitle')
         #hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
         await bot.send_photo(

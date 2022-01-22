@@ -45,23 +45,10 @@ async def link_handler(bot, message):
         description = event.get('description')
         #hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
-        await bot.send_message(
-        chat_id=message.chat.id,
-        text=f"**Content Name:** `{title}`\n\n**Description:** `{description}`\n\nHere is your [HLS Link]({hls_link})",
-        parse_mode="markdown",
-        disable_web_page_preview=True,
-        reply_to_message_id=message.message_id,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS YTDL Link 🔗", url=hls_link) ], 
-                                             [ InlineKeyboardButton(text="270P", url=lower),
-                                               InlineKeyboardButton(text="360P", url=medium),
-                                               InlineKeyboardButton(text="720P", url=higher) ],
-                                             [ InlineKeyboardButton(text="Poster", url=posterimage),                                                
-                                               InlineKeyboardButton(text="Thumbnail", url=videoimage) ], 
-                                             [ InlineKeyboardButton(text="📝 Subtitles 📝", url=subtitle) ] ] ) )
         await bot.send_photo(
         chat_id=message.chat.id,
         photo=f"{videoimage}",
-        caption=f"**Content Name:** `{title}`\n\n**Description:** `{description}`\n\nHere is your [HLS Link]({hls_link})",
+        caption=f"**🔰 Name:** `{title}`\n\n**🔰 Description:** `{description}`\n\n🔗 Here is your [HLS Link]({hls_link})",
         reply_to_message_id=message.message_id,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS YTDL Link 🔗", url=hls_link) ], 
                                              [ InlineKeyboardButton(text="270P", url=lower),
@@ -69,7 +56,7 @@ async def link_handler(bot, message):
                                                InlineKeyboardButton(text="720P", url=higher) ],
                                              [ InlineKeyboardButton(text="Poster", url=posterimage),                                                
                                                InlineKeyboardButton(text="Thumbnail", url=videoimage) ], 
-                                             [ InlineKeyboardButton(text="📝 Subtitles 📝", url=subtitle) ] ] ) )
+                                             [ InlineKeyboardButton(text="📝  Subtitles  📝", url=subtitle) ] ] ) )
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 

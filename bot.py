@@ -35,22 +35,23 @@ async def link_handler(bot, message):
     #event = r.json()
     try:
         hls_link = event.get('hls')
-        posterimage = event.get('posterImage')
+        posterimage = event.get('posterImage') if (event.get('posterImage') is not None) else "https://www.hoichoi.tv/"
         videoimage = event.get('videoImage')
         subtitle = event.get('subtitle') if (event.get('subtitle') is not None) else "No Substitle found."
         lower = event.get('270p')
         medium = event.get('360p')
         higher = event.get('720p')
         title = event.get('title')
+        year = event.get('year') if (event.get('year') is not None) else "Not mentioned"
         description = event.get('description')
         #hls_link = await get_shortlink(link)
         await message.reply(f'Here is your [HLS Link]({hls_link})', quote=True)
         await bot.send_photo(
         chat_id=message.chat.id,
         photo=f"{videoimage}",
-        caption=f"**🔰 Name:** `{title}`\n\n**🔰 Description:** `{description}`\n\n**📝 Subtitle:** `{subtitle}`\n\n🔗 Here is your [HLS Link]({hls_link})",
+        caption=f"**🔰 Name:** `{title}` | `{year}`\n\n**🔰 Description:** `{description}`\n\n**📝 Subtitle:** `{subtitle}`\n\n🔗 Here is your [HLS Link]({hls_link})",
         reply_to_message_id=message.message_id,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS YTDL Link 🔗", url=hls_link) ], 
+        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton(text="🔗 HLS m3u8 Link 🔗", url=hls_link) ], 
                                              [ InlineKeyboardButton(text="270P", url=lower),
                                                InlineKeyboardButton(text="360P", url=medium),
                                                InlineKeyboardButton(text="720P", url=higher) ],
